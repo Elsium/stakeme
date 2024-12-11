@@ -1,0 +1,16 @@
+node_modules/
+.next/
+coverage/
+.husky/
+
+package-lock.json
+next-env.d.ts
+cypress.config.ts
+docker-compose.yml
+Dockerfile
+jest.config.ts
+next.config.mjs
+postcss.config.mjs
+README.md
+tailwind.config.ts
+tsconfig.json

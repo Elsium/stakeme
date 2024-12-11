@@ -36,7 +36,7 @@ export const NodeDataModal: FC<NodeDataModalProps> = ({ onClose, groups, total }
             <div
                 ref={refModal}
                 className={
-                    'flex w-full max-w-[1000px] flex-col gap-[30px] rounded-xl bg-secondary p-[30px] text-textPrimary'
+                    'max-w-screen flex w-full flex-col gap-[30px] rounded-xl bg-secondary p-[30px] text-textPrimary md:max-w-[1000px]'
                 }
             >
                 <div className={'flex w-full items-center justify-between'}>
@@ -49,7 +49,7 @@ export const NodeDataModal: FC<NodeDataModalProps> = ({ onClose, groups, total }
                         <Image src={'/assets/close.svg'} alt={''} width={34} height={34} />
                     </button>
                 </div>
-                <div className={'grid w-full grid-cols-3 grid-rows-2 gap-5'}>
+                <div className={'grid w-full grid-cols-1 grid-rows-6 gap-5 md:grid-cols-3 md:grid-rows-2'}>
                     {currentItems.map((g, i) => (
                         <NodeDataModalItem
                             key={g.as}

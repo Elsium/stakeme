@@ -2,6 +2,7 @@
 
 import { useRouter, useSearchParams } from 'next/navigation'
 import { FC, useEffect, useState } from 'react'
+import { useMedia } from 'react-use'
 
 import { fetchNetworkData } from '@/shared/services'
 import { NetworkData, RPCItem } from '@/shared/types'
@@ -26,6 +27,8 @@ export const RPCTable: FC = () => {
     const [search, setSearch] = useState(initialSearch)
     const [sortBlockHistory, setSortBlockHistory] = useState<'asc' | 'desc'>(initialSortBlockHistory)
     const [sortIndexation, setSortIndexation] = useState<'on' | 'off'>(initialSortIndexation)
+
+    const isDesktop = useMedia('(min-width: 768px)', false)
 
     useEffect(() => {
         const params = new URLSearchParams()
@@ -71,12 +74,14 @@ export const RPCTable: FC = () => {
         <div className={'text-white'}>
             <TabSearch tab={tab} search={search} onTabChange={setTab} onSearchChange={setSearch} />
             <table className='mt-[28px] w-full text-sm'>
-                <RPCTableHeader
-                    sortBlockHistory={sortBlockHistory}
-                    sortIndexation={sortIndexation}
-                    onSortBlockHistory={onSortBlockHistory}
-                    onSortIndexation={onSortIndexation}
-                />
+                {isDesktop && (
+                    <RPCTableHeader
+                        sortBlockHistory={sortBlockHistory}
+                        sortIndexation={sortIndexation}
+                        onSortBlockHistory={onSortBlockHistory}
+                        onSortIndexation={onSortIndexation}
+                    />
+                )}
                 {!data ? (
                     <RPCTableSkeletonRows />
                 ) : (

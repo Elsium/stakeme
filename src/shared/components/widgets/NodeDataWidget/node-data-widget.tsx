@@ -61,8 +61,12 @@ export const NodeDataWidget: FC = () => {
     }))
 
     return (
-        <div className={'flex min-w-[360px] flex-col items-center gap-5 rounded-xl bg-secondary p-[30px] text-white'}>
-            <div className={'flex w-full items-center justify-between'}>
+        <div
+            className={
+                'flex min-w-[360px] flex-col-reverse items-center gap-5 rounded-xl bg-secondary p-[30px] text-white md:flex-col'
+            }
+        >
+            <div className={'flex w-full flex-col items-start justify-between md:flex-row md:items-center'}>
                 <h2 className={'text-lg font-light'}>Node Data Center</h2>
                 <div className={'flex items-center justify-center gap-3'}>
                     <Image className={'select-none'} src={'/assets/points.svg'} alt={''} width={60} height={20} />

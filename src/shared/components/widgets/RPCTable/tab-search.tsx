@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import { FC } from 'react'
+import { useMedia } from 'react-use'
 
 import { cn } from '@/shared/utils'
 
@@ -13,17 +14,19 @@ interface TabSearchProps {
 }
 
 export const TabSearch: FC<TabSearchProps> = ({ search, tab, onTabChange, onSearchChange }) => {
+    const isDesktop = useMedia('(min-width: 768px)', false)
+
     return (
         <>
-            <div className={'mb-[40px] flex items-center justify-between'}>
-                <h1 className={'font-montserrat text-xl font-normal'}>RPC / REST / GRPs</h1>
-                <div className={'relative'}>
+            <div className={'mb-[40px] flex items-center justify-between px-5 md:px-0'}>
+                <h1 className={'font-montserrat text-lg font-normal md:text-xl'}>RPC / REST / GRPs</h1>
+                <div className={'relative w-1/3 md:w-auto'}>
                     <input
                         value={search}
                         onChange={e => onSearchChange(e.target.value)}
-                        placeholder={'Search mode'}
+                        placeholder={isDesktop ? 'Search mode' : ''}
                         className={cn(
-                            'rounded-xl border-[0.9px] border-secondary bg-primary px-12 py-2 text-center text-textPrimary',
+                            'w-full rounded-xl border-[0.9px] border-secondary bg-primary px-8 py-2 text-center text-textPrimary md:px-12',
                             'placeholder:select-none placeholder:text-textPrimary/50',
                             'focus:border-tertiary focus:outline-none'
                         )}
@@ -33,11 +36,11 @@ export const TabSearch: FC<TabSearchProps> = ({ search, tab, onTabChange, onSear
                     </div>
                 </div>
             </div>
-            <div className='flex select-none items-center gap-[10px]'>
+            <div className='flex select-none items-center gap-[10px] px-5 md:px-0'>
                 <button
                     onClick={() => onTabChange('cosmos')}
                     className={cn(
-                        'h-[38px] w-[130px] rounded-3xl',
+                        'h-[38px] w-1/2 rounded-3xl md:w-[130px]',
                         `${tab === 'cosmos' ? 'bg-textSecondary text-secondary' : 'bg-tertiary text-textPrimary'}`
                     )}
                 >
@@ -46,7 +49,7 @@ export const TabSearch: FC<TabSearchProps> = ({ search, tab, onTabChange, onSear
                 <button
                     onClick={() => onTabChange('evm')}
                     className={cn(
-                        'h-[38px] w-[130px] rounded-3xl',
+                        'h-[38px] w-1/2 rounded-3xl md:w-[130px]',
                         `${tab === 'evm' ? 'bg-textSecondary text-secondary' : 'bg-tertiary text-textPrimary'}`
                     )}
                 >

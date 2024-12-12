@@ -10,7 +10,14 @@
     "endOfLine": "lf",
     "importOrderSeparation": true,
     "importOrderSortSpecifiers": true,
-    "importOrder": ["<THIRD_PARTY_MODULES>", "^@/app/(.*)$", "^@/shared/(.*)$", "^../(.*)$", "^./(.*)$"],
+    "importOrder": [
+        "<THIRD_PARTY_MODULES>",
+        "^@/app/(.*)$",
+        "^@/shared/(.*)$",
+        "^@/widget/(.*)$",
+        "^../(.*)$",
+        "^./(.*)$"
+    ],
     "plugins": ["@trivago/prettier-plugin-sort-imports", "prettier-plugin-tailwindcss"],
     "overrides": [
         {

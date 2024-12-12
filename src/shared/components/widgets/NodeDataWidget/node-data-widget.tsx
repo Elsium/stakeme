@@ -4,7 +4,6 @@ import Image from 'next/image'
 import { FC, useEffect, useState } from 'react'
 
 import { Skeleton } from '@/shared/components/ui'
-import { fetchMapData } from '@/shared/services'
 import { MapNodeData } from '@/shared/types'
 import { cn } from '@/shared/utils'
 
@@ -20,40 +19,34 @@ interface GroupedData {
     nodes: MapNodeData[]
 }
 
-export const NodeDataWidget: FC = () => {
-    const [loading, setLoading] = useState(true)
-    const [data, setData] = useState<MapNodeData[]>([])
+interface NodeDataWidgetProps {
+    data: MapNodeData[]
+}
+
+export const NodeDataWidget: FC<NodeDataWidgetProps> = ({ data }) => {
     const [grouped, setGrouped] = useState<GroupedData[]>([])
     const [showModal, setShowModal] = useState(false)
 
     useEffect(() => {
-        const fetchData = async (): Promise<void> => {
-            try {
-                const mapNodes = await fetchMapData()
-                setData(mapNodes)
-                const groups = mapNodes.reduce((acc: Record<string, MapNodeData[]>, node) => {
-                    acc[node.as] = acc[node.as] || []
-                    acc[node.as].push(node)
-                    return acc
-                }, {})
-                const groupArray = Object.entries(groups)
-                    .map(([as, nodes]) => ({
-                        as,
-                        isp: nodes[0]?.isp || '',
-                        count: nodes.length,
-                        nodes
-                    }))
-                    .sort((a, b) => b.count - a.count)
-                setGrouped(groupArray)
-                setLoading(false)
-            } catch (error) {
-                console.error('Error fetching map data:', error)
-            }
-        }
-        fetchData()
-    }, [])
+        const groupedData = data.reduce((acc: Record<string, MapNodeData[]>, node) => {
+            acc[node.as] = acc[node.as] || []
+            acc[node.as].push(node)
+            return acc
+        }, {})
 
-    const totalNodesCount = data.length
+        const groupArray = Object.entries(groupedData)
+            .map(([as, nodes]) => ({
+                as,
+                isp: nodes[0]?.isp || '',
+                count: nodes.length,
+                nodes
+            }))
+            .sort((a, b) => b.count - a.count)
+
+        setGrouped(groupArray)
+    }, [data])
+
+    const totalNodesCount = grouped.length
     const top6 = grouped.slice(0, 6)
     const segments = top6.map((g, i) => ({
         color: top6Colors[i],
@@ -75,10 +68,10 @@ export const NodeDataWidget: FC = () => {
             </div>
 
             <div className='flex w-full flex-row gap-4'>
-                <NodeDataChart segments={segments} loading={loading} innerColor='bg-secondary' cn={cn} />
+                <NodeDataChart segments={segments} loading={!grouped.length} innerColor='bg-secondary' cn={cn} />
                 <div className={'flex w-1/2 flex-col gap-1.5 font-poppins text-xs text-icon'}>
-                    {loading && [...Array(6)].map((_, i) => <Skeleton key={i} className={'h-4 w-full'} />)}
-                    {!loading &&
+                    {!grouped.length && [...Array(6)].map((_, i) => <Skeleton key={i} className={'h-4 w-full'} />)}
+                    {grouped.length &&
                         top6.map((g, i) => {
                             const pct = (g.count / totalNodesCount) * 100
                             return (

@@ -4,7 +4,6 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { FC, useEffect, useState } from 'react'
 import { useMedia } from 'react-use'
 
-import { fetchNetworkData } from '@/shared/services'
 import { NetworkData, RPCItem } from '@/shared/types'
 
 import { RPCTableHeader } from './rpc-table-header'
@@ -12,9 +11,11 @@ import { RPCTableRow } from './rpc-table-row'
 import { RPCTableSkeletonRows } from './rpc-table-skeleton-rows'
 import { TabSearch } from './tab-search'
 
-export const RPCTable: FC = () => {
-    const [data, setData] = useState<NetworkData | null>(null)
+interface RPCTableProps {
+    data: NetworkData
+}
 
+export const RPCTable: FC<RPCTableProps> = ({ data }) => {
     const searchParams = useSearchParams()
     const router = useRouter()
 
@@ -38,10 +39,6 @@ export const RPCTable: FC = () => {
         params.set('sortIndexation', sortIndexation)
         router.replace(`?${params.toString()}`, { scroll: false })
     }, [tab, search, sortBlockHistory, sortIndexation, router])
-
-    useEffect(() => {
-        fetchNetworkData().then(setData)
-    }, [])
 
     let filteredData: RPCItem[] = data ? (tab === 'cosmos' ? data.rpcs.cosmos : data.rpcs.evm) : []
     filteredData = filteredData.filter(item => item.noder.moniker.toLowerCase().includes(search.toLowerCase()))

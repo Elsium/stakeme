@@ -4,9 +4,9 @@
 
 @layer utilities {
     .alternate-rows > :nth-child(odd) {
-        @apply bg-primary;
+        @apply bg-primary w-full;
     }
     .alternate-rows > :nth-child(even) {
-        @apply bg-secondary;
+        @apply bg-secondary w-full;
     }
 }

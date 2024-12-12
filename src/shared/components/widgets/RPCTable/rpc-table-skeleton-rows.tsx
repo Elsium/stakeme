@@ -12,18 +12,18 @@ export const RPCTableSkeletonRows: FC = () => {
         return (
             <tbody className={'alternate-rows'}>
                 {[...Array(6)].map((_, i) => (
-                    <tr key={i} className={'border-b border-[#131313]'}>
-                        <td className='p-8'>
+                    <tr key={i} className={'grid grid-cols-table border-b border-[#131313]'}>
+                        <td className='py-8'>
                             <Skeleton className={'h-4 w-1/2'} />
                         </td>
-                        <td className='p-8'>
-                            <Skeleton className={'h-4 w-1/2'} />
+                        <td className='py-8'>
+                            <Skeleton className={'h-4 w-1/3'} />
                         </td>
-                        <td className='p-8'>
-                            <Skeleton className={'h-4 w-1/2'} />
+                        <td className='py-8'>
+                            <Skeleton className={'h-4 w-1/3'} />
                         </td>
-                        <td className='p-8'>
-                            <Skeleton className={'h-4 w-1/2'} />
+                        <td className='py-8'>
+                            <Skeleton className={'h-4 w-1/3'} />
                         </td>
                     </tr>
                 ))}
@@ -39,7 +39,7 @@ export const RPCTableSkeletonRows: FC = () => {
                                 <div className={'flex items-center gap-[30px]'}>
                                     <Skeleton className={'h-4 w-full'} />
                                 </div>
-                                <div className={'flex items-center gap-[20px]'}>
+                                <div className={'grid grid-cols-3 gap-[20px]'}>
                                     <Skeleton className={'h-4 w-[30%]'} />
                                     <Skeleton className={'h-4 w-[30%]'} />
                                     <Skeleton className={'h-4 w-[30%]'} />

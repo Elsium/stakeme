@@ -21,6 +21,9 @@ const config: Config = {
         textPrimary: '#FFFFFF',
         textSecondary: '#FAFAFA',
         textTertiary: '#9AB1CF',
+      },
+      gridTemplateColumns: {
+        'table': '2fr 1fr 1fr 1fr'
       }
     },
   },

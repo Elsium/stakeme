@@ -46,7 +46,8 @@ export const NodeDataWidget: FC<NodeDataWidgetProps> = ({ data }) => {
         setGrouped(groupArray)
     }, [data])
 
-    const totalNodesCount = grouped.length
+    const totalNodesCount = data.length
+    const totalGroupedNodesCount = grouped.length
     const top6 = grouped.slice(0, 6)
     const segments = top6.map((g, i) => ({
         color: top6Colors[i],
@@ -62,8 +63,17 @@ export const NodeDataWidget: FC<NodeDataWidgetProps> = ({ data }) => {
             <div className={'flex w-full flex-col items-start justify-between md:flex-row md:items-center'}>
                 <h2 className={'text-lg font-light'}>Node Data Center</h2>
                 <div className={'flex items-center justify-center gap-3'}>
-                    <Image className={'select-none'} src={'/assets/points.svg'} alt={''} width={60} height={20} />
-                    <p className={'text-2xl'}>{totalNodesCount}</p>
+                    <div className={'h-[20px] w-[60px]'}>
+                        <Image
+                            className={'select-none'}
+                            src={'/assets/points.svg'}
+                            alt={''}
+                            width={60}
+                            height={20}
+                            style={{ width: 'auto', height: 'auto' }}
+                        />
+                    </div>
+                    <p className={'text-2xl'}>{totalGroupedNodesCount}</p>
                 </div>
             </div>
 
@@ -75,7 +85,7 @@ export const NodeDataWidget: FC<NodeDataWidgetProps> = ({ data }) => {
                         top6.map((g, i) => {
                             const pct = (g.count / totalNodesCount) * 100
                             return (
-                                <div key={g.as} className={'flex items-center justify-between'}>
+                                <div key={g.as + ' widget'} className={'flex items-center justify-between'}>
                                     <div className={'flex items-center justify-center gap-1.5'}>
                                         <div
                                             className={'h-2 w-2 rounded-full'}

@@ -42,17 +42,32 @@ export const NodeDataModal: FC<NodeDataModalProps> = ({ onClose, groups, total }
                 <div className={'flex w-full items-center justify-between'}>
                     <div className={'flex items-center justify-center gap-3'}>
                         <h2 className={'font-poppins text-lg font-medium'}>Node Data Center</h2>
-                        <Image className={'select-none'} src={'/assets/points.svg'} alt={''} width={60} height={20} />
-                        <p className={'text-2xl'}>{total}</p>
+                        <div className={'h-[20px] w-[60px]'}>
+                            <Image
+                                className={'select-none'}
+                                src={'/assets/points.svg'}
+                                alt={''}
+                                width={60}
+                                height={20}
+                                style={{ width: 'auto', height: 'auto' }}
+                            />
+                        </div>
+                        <p className={'text-2xl'}>{groups.length}</p>
                     </div>
                     <button className={'select-none hover:brightness-150'} onClick={onClose}>
-                        <Image src={'/assets/close.svg'} alt={''} width={34} height={34} />
+                        <Image
+                            src={'/assets/close.svg'}
+                            alt={''}
+                            width={34}
+                            height={34}
+                            style={{ width: 'auto', height: 'auto' }}
+                        />
                     </button>
                 </div>
                 <div className={'grid w-full grid-cols-1 grid-rows-6 gap-5 md:grid-cols-3 md:grid-rows-2'}>
                     {currentItems.map((g, i) => (
                         <NodeDataModalItem
-                            key={g.as}
+                            key={g.as + ' modal'}
                             group={g}
                             index={i}
                             total={total}

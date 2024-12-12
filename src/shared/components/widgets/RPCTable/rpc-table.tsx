@@ -70,7 +70,7 @@ export const RPCTable: FC<RPCTableProps> = ({ data }) => {
     return (
         <div className={'text-white'}>
             <TabSearch tab={tab} search={search} onTabChange={setTab} onSearchChange={setSearch} />
-            <table className='mt-[28px] w-full text-sm'>
+            <table className='mx-2 mt-[28px] w-full text-sm'>
                 {isDesktop && (
                     <RPCTableHeader
                         sortBlockHistory={sortBlockHistory}

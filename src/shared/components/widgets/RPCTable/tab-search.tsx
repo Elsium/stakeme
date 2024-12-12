@@ -32,7 +32,13 @@ export const TabSearch: FC<TabSearchProps> = ({ search, tab, onTabChange, onSear
                         )}
                     />
                     <div className={'absolute right-3 top-1/2 -translate-y-1/2 select-none'}>
-                        <Image src={'/assets/search.svg'} alt={''} width={16} height={16} />
+                        <Image
+                            src={'/assets/search.svg'}
+                            alt={''}
+                            width={16}
+                            height={16}
+                            style={{ width: 'auto', height: 'auto' }}
+                        />
                     </div>
                 </div>
             </div>
